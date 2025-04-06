@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
     export function ReviewNotification({ onClose, onReview }) {
         return (
           <div className="review-notification">

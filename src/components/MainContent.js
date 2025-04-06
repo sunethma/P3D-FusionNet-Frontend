@@ -16,7 +16,7 @@ function MainContent() {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [showReviewPopup, setShowReviewPopup] = useState(false);
   const [showReviewNotification, setShowReviewNotification] = useState(false);
-  const modelViewerRef = useRef(null);
+  //const modelViewerRef = useRef(null);
   const threeJsContainerRef = useRef(null);
   const sceneRef = useRef(null);
 
