@@ -225,7 +225,7 @@ Error Handling: Comprehensive error handling throughout the application
 
 ## 🚀 API Endpoints
 
-POST /api/save-data
+POST ```/api/save-data```
 
 Save a new image and 3D model with optional review data.
 
@@ -241,7 +241,7 @@ Request Body:
 
 ```
 
-GET /api/model/:id
+GET ```/api/model/:id```
 
 Retrieve model metadata or full model data.
 
@@ -256,26 +256,26 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 
 ## 🐛 Troubleshooting
-### -Common Issues
+### Common Issues
 Frontend won't start:
 
 Check if Node.js is installed correctly
 Run npm install to ensure all dependencies are installed
 Check for port conflicts (default: 3000)
 
-### -Backend connection errors:
+### Backend connection errors:
 
 Verify MongoDB Atlas connection string in .env file in p3d-fusion-backend
 Ensure your IP address is whitelisted in MongoDB Atlas
 Check if the backend server is running on port 5000 using node server.js
 
-### -File upload issues:
+### File upload issues:
 
 Ensure files are PNG or JPEG format
 Check file size limits
 Verify network connectivity
 
-### -3D Model generation fails:
+### 3D Model generation fails:
 
 Check backend logs for detailed error messages
 Ensure the AI service is properly configured
