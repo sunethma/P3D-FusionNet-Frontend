@@ -1,70 +1,287 @@
-# Getting Started with Create React App
+# P3D-FusionNet Front End 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This the front end of my final year project P3D-FusionNet, Thr backend of this project which includes the model the traning and evaluation is added into [P3D-FusionNet backend](https://github.com/sunethma/P3D-FusionNet-backend.git) repostory. This is built with React.js frontend and Node.js backend, featuring secure data storage and user feedback systems. 
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+Image Upload & Processing: Support for PNG and JPEG image formats
 
-### `npm start`
+3D Model Generation: AI-powered conversion from 2D images to 3D models
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Interactive History: View and manage previously generated models
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+User Feedback System: Rate and review generated models
 
-### `npm test`
+Secure Data Storage: Encrypted storage of images and 3D models
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Responsive Design: Works seamlessly across desktop and mobile devices
 
-### `npm run build`
+Real-time Loading States: Visual feedback during model generation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+Frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+React.js - Modern JavaScript library for building user interfaces
 
-### `npm run eject`
+React Router - Client-side routing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Axios - HTTP client for API requests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+CSS3 - Custom styling with modern design patterns
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Backend
 
-## Learn More
+Node.js - JavaScript runtime environment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Express.js - Web application framework
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+MongoDB Atlas - Cloud database service
 
-### Code Splitting
+Crypto - Built-in encryption for data security
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Multer - File upload handling
 
-### Analyzing the Bundle Size
+CORS - Cross-origin resource sharing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
 
-### Making a Progressive Web App
+## 📋 Prerequisites
+Before running this application, make sure you have the following installed:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Node.js (v14.0.0 or higher)
 
-### Advanced Configuration
+npm (v6.0.0 or higher)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+MongoDB Atlas Account (for database)
 
-### Deployment
+## ⚙️ Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Clone the Repository
 
-### `npm run build` fails to minify
+ ```bash
+   
+git clone https://github.com/sunethma/P3D-FusionNet-Frontend.git
+cd P3D-FusionNet-Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+
+### 2. Frontend Setup
+
+```bash
+# Navigate to frontend directory
+cd p3d-fusion-app
+
+# Install dependencies
+npm install
+
+# Install additional required packages
+npm install axios react-router-dom
+
+```
+
+## 3. Backend Setup
+
+```bash
+
+# Navigate to backend directory
+cd p3d-fusion-backend
+
+# Install dependencies
+npm install express mongodb cors multer dotenv body-parser crypto
+
+```
+## 4. Environment Configuration
+
+Create a .env file in your p3d-fusion-backend directory with the following variables:
+
+```bash 
+# MongoDB Connection String
+MONGODB_URI=your_mongodb_atlas_connection_string
+
+# Encryption key (must be exactly 32 characters for AES-256)
+ENCRYPTION_KEY=your_32_character_encryption_key
+
+# Server port
+PORT=5000
+```
+
+Important:
+
+Replace your_mongodb_atlas_connection_string with your actual MongoDB Atlas connection string
+Generate a secure 32-character encryption key for data protection
+Never commit your .env file to version control
+
+## 🚦 Running the Application
+Development Mode
+
+1. Start the Backend Server:
+
+```bash
+
+cd p3d-fusion-backend
+node server.js
+# Server will run on http://localhost:5000
+
+```
+
+2. Start the Frontend Development Server:
+
+```bash
+
+cd p3d-fusion-app
+npm start
+# Application will open at http://localhost:3000
+
+```
+
+Production Build
+
+```bash
+
+# Build the frontend for production
+cd p3d-fusion-app
+npm run build
+
+# Serve the production build (optional)
+npm install -g serve
+serve -s build
+
+```
+
+## 📁 Project Structure
+
+```
+p3d-fusion-app/
+├── src/
+│   ├── components/
+│   │   ├── Header.js
+│   │   ├── Footer.js
+│   │   ├── MainContent.js
+│   │   ├── History.js
+│   │   ├── About.js
+│   │   ├── ImageDisplay.js
+│   │   ├── LoadingSpinner.js
+│   │   ├── ReviewPopup.js
+│   │   ├── ReviewNotification.js
+│   │   ├── ImageTypeErrorModal.js
+│   │   └── AppStateContext.js
+│   ├── assets/
+│   ├── App.js
+│   ├── App.css
+│   └── index.js
+├── public/
+├── package.json
+p3d-fusion-backend/
+├── server.js
+├── .env
+└── package.json
+└── README.md
+```
+
+## 🎯 Usage
+1. Upload an Image
+
+Click on the image upload area
+Select a PNG or JPEG file from your device
+The image will be displayed in the preview area
+
+2. Generate 3D Model
+
+Click the "Generate 3D Model" button
+Wait for the AI processing to complete
+View your generated 3D model
+
+3. Review and Save
+
+Rate your experience (1-5 stars)
+Provide optional feedback
+Save the model to your history
+
+4. View History
+
+Navigate to the History page
+Browse your previously generated models
+Reload any model back into the editor
+
+---
+
+## 🔐 Security Features
+
+Data Encryption: All images and 3D models are encrypted using AES-256 before storage
+
+
+Secure Headers: CORS protection and secure HTTP headers
+
+Input Validation: File type validation and size limits
+
+Error Handling: Comprehensive error handling throughout the application
+
+---
+
+## 🚀 API Endpoints
+
+POST /api/save-data
+
+Save a new image and 3D model with optional review data.
+
+Request Body:
+
+```bash 
+{
+  image: String,      // Base64 encoded image
+  model: String,      // 3D model data
+  rating: Number,     // Optional rating (1-5)
+  feedback: String    // Optional feedback text
+}
+
+```
+
+GET /api/model/:id
+
+Retrieve model metadata or full model data.
+
+Query Parameters:
+
+```includeData=true``` - Include encrypted image and model data
+
+---
+
+## 📝 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+## 🐛 Troubleshooting
+### -Common Issues
+Frontend won't start:
+
+Check if Node.js is installed correctly
+Run npm install to ensure all dependencies are installed
+Check for port conflicts (default: 3000)
+
+### -Backend connection errors:
+
+Verify MongoDB Atlas connection string in .env file in p3d-fusion-backend
+Ensure your IP address is whitelisted in MongoDB Atlas
+Check if the backend server is running on port 5000 using node server.js
+
+### -File upload issues:
+
+Ensure files are PNG or JPEG format
+Check file size limits
+Verify network connectivity
+
+### -3D Model generation fails:
+
+Check backend logs for detailed error messages
+Ensure the AI service is properly configured
+Verify image format compatibility
+
+---
+
+## 🧑‍💻 Author
+Created by Sunethma Welathanthri
