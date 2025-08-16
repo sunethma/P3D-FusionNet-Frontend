@@ -1,4 +1,4 @@
-# P3D-FusionNet Front End 
+# P3D-FusionNet Frontend 
 
 This the front end of my final year project P3D-FusionNet, Thr backend of this project which includes the model the traning and evaluation is added into [P3D-FusionNet backend](https://github.com/sunethma/P3D-FusionNet-backend.git) repostory. This is built with React.js frontend and Node.js backend, featuring secure data storage and user feedback systems. 
 
