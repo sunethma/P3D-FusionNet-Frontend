@@ -17,6 +17,7 @@ function Header() {
       
       <nav className="nav-links">
         <Link to="/">HOME</Link>
+        <Link to="/history">HISTORY</Link>
         <Link to="/about">ABOUT</Link>
         {/* <Link to="/contact">CONTACT</Link> */}
       </nav>

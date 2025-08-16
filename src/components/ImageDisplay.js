@@ -1,19 +1,20 @@
-// components/ImageDisplay.js
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import placeholderLogo from '../assets/p3d-logo.png';
 
-function ImageDisplay({ image, alt, placeholder, onChange, readOnly = false }) {
-  const fileInputRef = useRef(null);
-
+const ImageDisplay = forwardRef(({ image, alt, placeholder, onChange, readOnly = false }, ref) => {
+  // Create internal ref if no external ref is provided
+  const internalFileInputRef = useRef(null);
+  // Use the passed ref if available, otherwise use the internal one
+  const fileInputRef = ref || internalFileInputRef;
+  
   const handleContainerClick = () => {
     if (!readOnly && fileInputRef.current) {
-    
       fileInputRef.current.click();
     }
   };
-
+  
   return (
-    <div 
+    <div
       className={`image-display ${!image ? 'empty' : ''} ${readOnly ? 'readonly' : ''}`}
       onClick={handleContainerClick}
     >
@@ -37,6 +38,9 @@ function ImageDisplay({ image, alt, placeholder, onChange, readOnly = false }) {
       )}
     </div>
   );
-}
+});
+
+// Add display name for better debugging
+ImageDisplay.displayName = 'ImageDisplay';
 
 export default ImageDisplay;

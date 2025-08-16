@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -6,21 +6,44 @@ import ImageDisplay from './ImageDisplay';
 import ReviewPopup from './ReviewPopup';
 import ReviewNotification from './ReviewNotification';
 import ImageTypeErrorModal from './ImageTypeErrorModal';
-
+import axios from 'axios';
+import { useAppState } from './AppStateContext';
 
 function MainContent() {
-  const [showImageTypeErrorModal, setShowImageTypeErrorModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [generatedModel, setGeneratedModel] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [showReviewPopup, setShowReviewPopup] = useState(false);
-  const [showReviewNotification, setShowReviewNotification] = useState(false);
-  //const modelViewerRef = useRef(null);
+  // Use global app state instead of component state
+  const { 
+    selectedImage, 
+    generatedModel, 
+    updateImage, 
+    updateModel, 
+    clearState 
+  } = useAppState();
+  
+  // Component state for UI-specific states
+  const [showImageTypeErrorModal, setShowImageTypeErrorModal] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [loadingProgress, setLoadingProgress] = React.useState(0);
+  const [showReviewPopup, setShowReviewPopup] = React.useState(false);
+  const [showReviewNotification, setShowReviewNotification] = React.useState(false);
+  
   const threeJsContainerRef = useRef(null);
   const sceneRef = useRef(null);
-
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    // Check if there's a model to reload from the history component
+    const reloadImage = sessionStorage.getItem('reloadImage');
+    const reloadModel = sessionStorage.getItem('reloadModel');
+    
+    if (reloadImage && reloadModel) {
+      updateImage(reloadImage);
+      updateModel(reloadModel);
+      
+      // Clear the session storage after loading
+      sessionStorage.removeItem('reloadImage');
+      sessionStorage.removeItem('reloadModel');
+    }
+  }, [updateImage, updateModel]);
 
   const validateImageUpload = async (file) => {
     // Allowed file types
@@ -42,7 +65,6 @@ function MainContent() {
     return true;
   };
 
-
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -52,8 +74,8 @@ function MainContent() {
       if (isValid) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          setSelectedImage(e.target.result);
-          setGeneratedModel(null);
+          updateImage(e.target.result);
+          updateModel(null);
         };
         reader.readAsDataURL(file);
       } else {
@@ -65,10 +87,8 @@ function MainContent() {
     }
   };
 
-
   const clearContent = () => {
-    setSelectedImage(null);
-    setGeneratedModel(null);
+    clearState();
     // Reset file input
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -99,7 +119,7 @@ function MainContent() {
       const result = await apiResponse.json();
   
       if (result.objData) {
-        setGeneratedModel(result.objData);
+        updateModel(result.objData);
         setLoadingProgress(100);
         // Show review notification after model generation
         setShowReviewNotification(true);
@@ -112,6 +132,41 @@ function MainContent() {
       setIsLoading(false);
     }
   };
+
+  const saveDataToMongoDB = async (rating, feedback) => {
+    try {
+      if (!selectedImage || !generatedModel) {
+        console.error('Missing image or model data');
+        return;
+      }
+  
+      console.log('Saving data to MongoDB...');
+      
+      const response = await axios.post('http://localhost:5000/api/save-data', {
+        image: selectedImage,
+        model: generatedModel,
+        rating,
+        feedback
+      });
+  
+      console.log('Data saved successfully:', response.data);
+      
+      // Store the model ID in the session storage to create a history
+      const sessionModelIds = JSON.parse(localStorage.getItem('sessionModelIds') || '[]');
+      sessionModelIds.push(response.data.id);
+      localStorage.setItem('sessionModelIds', JSON.stringify(sessionModelIds));
+      
+      // Optionally show a success message
+      alert('Your feedback and model have been saved successfully!');
+      
+      return response.data;
+    } catch (error) {
+      console.error('Error saving data to MongoDB:', error);
+      alert('Failed to save data. Please try again.');
+      throw error;
+    }
+  };
+
   const downloadModel = () => {
     if (generatedModel) {
       const blob = new Blob([generatedModel], { type: 'text/plain' });
@@ -323,6 +378,9 @@ function MainContent() {
           onCancelKeepNotification={() => {
             setShowReviewPopup(false);
           }}
+          onSubmitReview={saveDataToMongoDB}
+          image={selectedImage}
+          model={generatedModel}
         />
       )}
       {/* Image Type Error Modal */}

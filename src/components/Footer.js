@@ -20,6 +20,7 @@ function Footer() {
         <h3>Site Navigation</h3>
         <ul>
           <li><a href="#home">Home</a></li>
+          <li><a href="#history">History</a></li>
           <li><a href="#about">About</a></li>
         </ul>
       </div>
@@ -37,7 +38,7 @@ function Footer() {
         <ul className="contact-info">
           <li><i className="phone-icon"></i> Tel: 0765784993</li>
           <li><i className="email-icon"></i> Email: sunethma.20210246@iit.ac.lk</li>
-          <li><i className="location-icon"></i> Address: No 1/A, Ashoka Mawaths, Panadura</li>
+          <li><i className="location-icon"></i> Address: No 1/A, Ashoka Mawatha, Panadura</li>
         </ul>
       </div>
       
