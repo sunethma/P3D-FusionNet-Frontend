@@ -252,7 +252,7 @@ Query Parameters:
 ---
 
 ## 📝 License
-This project is licensed under the MIT License - [see the LICENSE file for details](https://github.com/sunethma/P3D-FusionNet-Frontend/blob/main/LICENSE).
+This project is licensed under the MIT License - see the [LICENSE file](https://github.com/sunethma/P3D-FusionNet-Frontend/blob/main/LICENSE)  for details.
 
 
 ## 🐛 Troubleshooting
